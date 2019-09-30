@@ -1,10 +1,20 @@
-<h1>Hello world</h1>
+<div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+  <% @posts.each do |post| %>
+    <div class="card">
+        <div class="handle"><%= post.user %></div>
+        <%= image_tag post.picture.to_s, class: 'img-fluid' %>
+        <p>
+        <%= post.message %>
+        </p>
 
-<% @posts.each do |post| %>
-    <div>
-    <%= post.message %>
-    <% if post.picture %>
-        <%= image_tag post.picture %>
-    <% end %>
+        <div class="post-actions float-right">
+        <% if current_user && current_user == post.user %>
+            <%= link_to 'Edit', edit_post_path(post) %>
+            <%= link_to 'Destroy', post_path(post), method: :delete, data: {confirm: 'Are you sure?'} %>
+        <% end %>
+        </div>
+        <br class="clear-fix" />
+        
     </div>
-<% end %>
+  <% end %>
+</div>
