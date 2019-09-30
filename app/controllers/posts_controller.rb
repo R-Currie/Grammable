@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
     def index
-
+        @posts = Post.all
     end
 
     def show
@@ -55,7 +55,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:message)
+        params.require(:post).permit(:message, :picture)
     end
 
     def render_not_found(status=:not_found)
